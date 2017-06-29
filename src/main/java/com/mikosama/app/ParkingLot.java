@@ -36,6 +36,8 @@ class ParkingLot
 
 		// all idiot-proofing complete.
 		slots[slotNo] = null;
+		if( slotNo < nextParkingLocation )
+			nextParkingLocation = slotNo;
 		return "Slot number " + (++slotNo) + " is free";
 	}
 }

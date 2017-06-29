@@ -77,7 +77,7 @@ public class AppTest
       ParkingLot lot = new ParkingLot(3);
       String result = lot.park(new Car("KA-01-HH-1234","White"));
 
-      assertTrue( result.equals("Allocated slot number: 1") );
+      assertEquals( result , "Allocated slot number: 1" );
     }
 
     // now we check that parking logic works right
@@ -87,18 +87,18 @@ public class AppTest
 
       // this part we checked already
       String result = lot.park(new Car("KA-01-HH-1234","White"));
-      assertTrue( result.equals("Allocated slot number: 1") );
+      assertEquals( result , "Allocated slot number: 1" );
 
       // checking that the pointer is incremented right
       result = lot.park(new Car("KA-01-HH-9999","White"));
-      assertTrue( result.equals("Allocated slot number: 2") );
+      assertEquals( result , "Allocated slot number: 2" );
 
       result = lot.park(new Car("KA-01-BB-0001","Black"));
-      assertTrue( result.equals("Allocated slot number: 3") );
+      assertEquals( result , "Allocated slot number: 3" );
 
       // parking full condition check
       result = lot.park(new Car("KA-01-HH-7777","White"));
-      assertTrue( result.equals("Sorry, parking lot is full") );
+      assertEquals( result , "Sorry, parking lot is full" );
     }
 
     // test basic leaving functionality
@@ -109,7 +109,7 @@ public class AppTest
 
       String result = lot.leave(1);
 
-      assertTrue( result.equals("Slot number 1 is free") );
+      assertEquals( result , "Slot number 1 is free" );
     }
 
     // check that the system catches situations where people try to empty an invalid/empty slot
@@ -120,20 +120,39 @@ public class AppTest
 
       // Invalid slot case (boundary check, I guess)
       String result = lot.leave(-1);
-      assertTrue( result.equals("Invalid slot number") );
+      assertEquals( result , "Invalid slot number" );
 
       result = lot.leave(4);
-      assertTrue( result.equals("Invalid slot number") );
+      assertEquals( result , "Invalid slot number" );
 
       // Empty slot case
       result = lot.leave(2);
-      assertTrue( result.equals("That slot is empty") );
+      assertEquals( result , "That slot is empty" );
 
       // A slot where a car has already left
       result = lot.leave(1);
-      assertTrue( result.equals("Slot number 1 is free") ); // just a double-check
+      assertEquals( result , "Slot number 1 is free" ); // just a double-check
 
       result = lot.leave(1);
-      assertTrue( result.equals("That slot is empty") );
+      assertEquals( result , "That slot is empty" );
+    }
+
+    // if a car leaves then a new car will probably want to park there instead of at the end
+    public void testParkingLocationChangeAfterLeaveTrue()
+    {
+      ParkingLot lot = new ParkingLot(6);
+
+      // first we park some cars
+      lot.park(new Car("KA-01-HH-1234","White"));
+      lot.park(new Car("KA-01-HH-9999","White"));
+      lot.park(new Car("KA-01-BB-0001","Black"));
+      lot.park(new Car("KA-01-HH-7777","White"));
+
+      // now we let one of these cars leave
+      lot.leave(2);
+
+      // and then we check that the next car to be parked occupies that space
+      String result = lot.park(new Car("KA-01-HH-2701","Blue"));
+      assertEquals( result , "Allocated slot number: 2" );
     }
 }
