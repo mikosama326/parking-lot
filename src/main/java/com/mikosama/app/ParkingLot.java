@@ -57,4 +57,14 @@ class ParkingLot
     if( availableSlot < nextParkingLocation )
 			nextParkingLocation = availableSlot;
   }
+
+	public String searchSlotByRegistrationNo(String registrationNo)
+	{
+		for(int i = 0; i < slots.length ; i++)
+		{
+			if( slots[i] != null && slots[i].getRegistrationNo().equals(registrationNo) )
+				return ""+(i+1); //
+		}
+		return "Not found";
+	}
 }

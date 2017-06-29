@@ -177,4 +177,23 @@ public class AppTest
       String result = lot.park(new Car("KA-01-HH-3141","Black"));
       assertEquals( result , "Allocated slot number: 5" );
     }
+
+    //need a more comprehensive test here but we'll work on that later
+
+    public void testSearchSlotByRegistrationNumber()
+    {
+      ParkingLot lot = new BetterParkingLot(6);
+
+      // first we park some cars
+      lot.park(new Car("KA-01-HH-1234","White"));
+      lot.park(new Car("KA-01-HH-9999","White"));
+      lot.park(new Car("KA-01-BB-0001","Black"));
+      lot.park(new Car("KA-01-HH-7777","White"));
+
+      String result = lot.searchSlotByRegistrationNo("KA-01-BB-0001");
+      assertEquals(result, "3");
+
+      result = lot.searchSlotByRegistrationNo("KA-01-HH-2701");
+      assertEquals(result , "Not found");
+    }
 }
