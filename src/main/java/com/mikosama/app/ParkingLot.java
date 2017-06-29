@@ -34,10 +34,13 @@ class ParkingLot
 		if(slots[slotNo] == null)
 			return "That slot is empty";
 
-		// all idiot-proofing complete.
-		slots[slotNo] = null;
+		// all idiot-proofing complete. Moving on...
+		slots[slotNo] = null; // get rid of that car.
+
+		// update the nextParkingLocation pointer only if the newly-empty slot is closer to the entrance
 		if( slotNo < nextParkingLocation )
 			nextParkingLocation = slotNo;
+
 		return "Slot number " + (++slotNo) + " is free";
 	}
 }
