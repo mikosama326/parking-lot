@@ -257,11 +257,11 @@ public class AppTest
     * Woohoo! That's the end of all Parking Lot Unit Tests
     * Moving on to Unit Testing the Shell
     */
-
+/*
     public void testShellCreateParkingLotCommand()
     {
       Shell shell = new Shell();
       String result = shell.parseCommand("create_parking_lot 6");
       assertEquals( result, "Created a parking lot with 6 slots" );
-    }
+    }*/
 }
