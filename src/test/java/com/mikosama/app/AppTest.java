@@ -249,10 +249,7 @@ public class AppTest
       lot.leave(2);
 
       String result = lot.status();
-      assertEquals(result,
-"Slot No.	Registration No	Colour
-1	KA-01-HH-1234	White
-3	KA-01-BB-0001	Black
-4	KA-01-HH-7777	White");
+      assertEquals( result,
+"Slot No.\tRegistration No\tColour\n1\tKA-01-HH-1234\tWhite\n3\tKA-01-BB-0001\tBlack\n4\tKA-01-HH-7777\tWhite\n" );
     }
 }

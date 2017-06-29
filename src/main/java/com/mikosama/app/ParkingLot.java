@@ -113,4 +113,15 @@ class ParkingLot
 		return results;
 	}
 
+	public String status()
+	{
+		String answer = "Slot No.\tRegistration No\tColour\n";
+		for(int i = 0; i < slots.length ; i++)
+		{
+			if( slots[i] != null )
+				answer += (i+1) + "\t" + slots[i].getRegistrationNo() + "\t" + slots[i].getColor() + "\n";
+		}
+		return answer;
+	}
+
 }
