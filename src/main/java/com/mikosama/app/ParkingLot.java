@@ -1,5 +1,7 @@
 package com.mikosama.app;
 
+import java.util.ArrayList;
+
 class ParkingLot
 {
 	int nextParkingLocation = 0;
@@ -63,9 +65,52 @@ class ParkingLot
 		for(int i = 0; i < slots.length ; i++)
 		{
 			if( slots[i] != null && slots[i].getRegistrationNo().equals(registrationNo) )
-				return ""+(i+1); //
+				return ""+(i+1);
 		}
 		return "Not found";
+	}
+
+	public String searchSlotsByColor(String color)
+	{
+		ArrayList<Integer> results = searchByColor(color);
+
+		if(results.size() == 0)
+			return "Not found";
+
+		String answer = "";
+		for(Integer index : results)
+			answer = answer + (index+1) + ", ";
+
+		answer = answer.substring(0,answer.length()-2); // cutting off the last ", "
+
+		return answer;
+	}
+
+	public String searchRegistrationNosByColor(String color)
+	{
+		ArrayList<Integer> results = searchByColor(color);
+
+		if(results.size() == 0)
+			return "Not found";
+
+		String answer = "";
+		for(Integer index : results)
+			answer = answer + (slots[index].getRegistrationNo()) + ", "; // basically the only line that's different.
+
+		answer = answer.substring(0,answer.length()-2); // cutting off the last ", "
+
+		return answer;
+	}
+
+	protected ArrayList<Integer> searchByColor(String color)
+	{
+		ArrayList<Integer> results = new ArrayList<Integer>();
+		for(int i = 0; i < slots.length ; i++)
+		{
+			if( slots[i] != null && slots[i].getColor().equals(color) )
+				results.add(i);
+		}
+		return results;
 	}
 
 }
