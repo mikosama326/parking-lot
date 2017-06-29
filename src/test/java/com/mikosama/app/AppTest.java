@@ -72,7 +72,7 @@ public class AppTest
 
     public void testBasicPark()
     {
-      ParkingLot lot = new ParkingLot(6);
+      ParkingLot lot = new ParkingLot(3);
       String result = lot.park(new Car("KA-01-HH-1234","White"));
 
       assertTrue( result.equals("Allocated slot number: 1") );
@@ -93,6 +93,16 @@ public class AppTest
 
       result = lot.park(new Car("KA-01-HH-7777","White"));
       assertTrue( result.equals("Sorry, parking lot is full") );
+    }
+
+    public void testBasicLeave()
+    {
+      ParkingLot lot = new ParkingLot(3);
+      lot.park(new Car("KA-01-HH-1234","White"));
+
+      String result = lot.leave(1);
+
+      assertTrue( result.equals("Slot number 1 is free") );
     }
 
 }
