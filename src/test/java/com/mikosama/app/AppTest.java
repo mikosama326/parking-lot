@@ -3,7 +3,6 @@ package com.mikosama.app;
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
-
 /**
  * Unit test for simple App.
  */
@@ -74,8 +73,9 @@ public class AppTest
     public void testPark()
     {
       ParkingLot lot = new ParkingLot(6);
-      result = lot.park(new Car("KA-01-HH-1234","White"));
-      assertTrue( result == "Allocated slot number: 1" );
+      String result = lot.park(new Car("KA-01-HH-1234","White"));
+      
+      assertTrue( result.equals("Allocated slot number: 1") );
     }
 
 }
