@@ -236,4 +236,23 @@ public class AppTest
       result = lot.searchRegistrationNosByColor("Purple");
       assertEquals(result , "Not found");
     }
+
+    public void testStatus()
+    {
+      ParkingLot lot = new BetterParkingLot(6);
+
+      // first we park some cars
+      lot.park(new Car("KA-01-HH-1234","White"));
+      lot.park(new Car("KA-01-HH-9999","White"));
+      lot.park(new Car("KA-01-BB-0001","Black"));
+      lot.park(new Car("KA-01-HH-7777","White"));
+      lot.leave(2);
+
+      String result = lot.status();
+      assertEquals(result,
+"Slot No.	Registration No	Colour
+1	KA-01-HH-1234	White
+3	KA-01-BB-0001	Black
+4	KA-01-HH-7777	White");
+    }
 }
