@@ -7,7 +7,7 @@ import junit.framework.TestSuite;
 /**
  * Unit test for simple App.
  */
-public class AppTest 
+public class AppTest
     extends TestCase
 {
     /**
@@ -35,4 +35,40 @@ public class AppTest
     {
         assertTrue( true );
     }
+
+    public void testThatThisRuns()
+    {
+        assertTrue( true );
+    }
+
+    public void testInteractiveShellCreation()
+    {
+      Shell shell = new Shell();
+      
+      assertTrue( true );
+    }
+
+    public void testFileShellCreation()
+    {
+      Shell shell = new Shell("src/test/java/com/mikosama/app/shelltestfile");
+
+      assertTrue( true );
+    }
+
+    public void testCarCreation()
+    {
+      Car car = new Car("KA-01-HH-1234","White");
+      String recievedColor = car.getColor();
+      String recievedRegistrationNo = car.getRegistrationNo();
+
+      assertTrue( recievedColor == "White" && recievedRegistrationNo == "KA-01-HH-1234" );
+    }
+
+    public void testParkingLotCreation()
+    {
+      ParkingLot PLot = new ParkingLot(6);
+
+      assertTrue( true );
+    }
+
 }
