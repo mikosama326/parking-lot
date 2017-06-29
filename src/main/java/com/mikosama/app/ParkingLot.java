@@ -12,6 +12,11 @@ class ParkingLot
 		slots = new Car[size];
 	}
 
+	public String create() // meant to help check that the parking lot creation happened correctly.
+	{
+		return "Created a parking lot with " + slots.length + " slots";
+	}
+
 	public String park(Car incomingCar)
 	{
 		// Parking full?

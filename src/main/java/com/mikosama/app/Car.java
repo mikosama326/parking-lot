@@ -7,11 +7,13 @@ class Car
 
 		public Car(String registrationNo,String color)
 		{
-				//TODO: check that the registrationNo adheres to come sort of regex?
+				//check that the registrationNo adheres to come sort of regex?
+
 				this.registrationNo = registrationNo;
 				this.color = color;
 		}
 
+		// getter methods for the fields. They're both read-only.
 		public String getColor()
 		{
 				return color;

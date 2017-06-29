@@ -67,8 +67,8 @@ public class AppTest
     public void testParkingLotCreation()
     {
       ParkingLot lot = new BetterParkingLot(6);
-
-      assertTrue( true );
+      String result = lot.create();
+      assertEquals( result, "Created a parking lot with 6 slots" );
     }
 
     // basic parking functionality test
@@ -251,5 +251,17 @@ public class AppTest
       String result = lot.status();
       assertEquals( result,
 "Slot No.\tRegistration No\tColour\n1\tKA-01-HH-1234\tWhite\n3\tKA-01-BB-0001\tBlack\n4\tKA-01-HH-7777\tWhite\n" );
+    }
+
+    /*
+    * Woohoo! That's the end of all Parking Lot Unit Tests
+    * Moving on to Unit Testing the Shell
+    */
+
+    public void testShellCreateParkingLotCommand()
+    {
+      Shell shell = new Shell();
+      String result = shell.parseCommand("create_parking_lot 6");
+      assertEquals( result, "Created a parking lot with 6 slots" );
     }
 }
