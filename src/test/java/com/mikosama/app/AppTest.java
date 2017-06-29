@@ -44,7 +44,7 @@ public class AppTest
     public void testInteractiveShellCreation()
     {
       Shell shell = new Shell();
-      
+
       assertTrue( true );
     }
 
@@ -66,9 +66,16 @@ public class AppTest
 
     public void testParkingLotCreation()
     {
-      ParkingLot PLot = new ParkingLot(6);
+      ParkingLot lot = new ParkingLot(6);
 
       assertTrue( true );
+    }
+
+    public void testPark()
+    {
+      ParkingLot lot = new ParkingLot(6);
+      result = lot.park(new Car("KA-01-HH-1234","White"));
+      assertTrue( result == "Allocated slot number: 1" );
     }
 
 }

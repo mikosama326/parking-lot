@@ -10,5 +10,4 @@ class ParkingLot
 		slots = new Car[size];
 	}
 
-	
 }
