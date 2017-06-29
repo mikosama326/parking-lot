@@ -138,7 +138,7 @@ public class AppTest
     }
 
     // if a car leaves then a new car will probably want to park there instead of at the end
-    public void testParkingLocationChangeAfterLeaveTrue()
+    public void testParkingLocationChangeAfterLeave()
     {
       ParkingLot lot = new ParkingLot(6);
 
@@ -154,5 +154,27 @@ public class AppTest
       // and then we check that the next car to be parked occupies that space
       String result = lot.park(new Car("KA-01-HH-2701","Blue"));
       assertEquals( result , "Allocated slot number: 2" );
+    }
+
+    // same as previous but one step further
+    public void testParkingLocationChange()
+    {
+      ParkingLot lot = new ParkingLot(6);
+
+      // first we park some cars
+      lot.park(new Car("KA-01-HH-1234","White"));
+      lot.park(new Car("KA-01-HH-9999","White"));
+      lot.park(new Car("KA-01-BB-0001","Black"));
+      lot.park(new Car("KA-01-HH-7777","White"));
+
+      // now we let one of these cars leave
+      lot.leave(2);
+
+      // then we park another car in that newly-empty space
+      lot.park(new Car("KA-01-HH-2701","Blue"));
+
+      // and now we try to park one more car
+      String result = lot.park(new Car("KA-01-HH-3141","Black"));
+      assertEquals( result , "Allocated slot number: 5" );
     }
 }
