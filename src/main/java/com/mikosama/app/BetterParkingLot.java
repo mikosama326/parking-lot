@@ -1,55 +1,45 @@
 package com.mikosama.app;
 
-class ParkingLot
-{
-	int nextParkingLocation = 0;
-	Car[] slots; //are we really using an array for this?
+import java.util.Comparator;
+import java.util.PriorityQueue;
 
-	public ParkingLot( int size )
+class BetterParkingLot extends ParkingLot
+{
+  PriorityQueue<Integer> queue;
+
+	public BetterParkingLot( int size )
 	{
-		slots = new Car[size];
+		super(size);
+    queue = new PriorityQueue<Integer>(size);
+
+    // add all available parking slots in zero-indexed form
+    for(int i=0; i < size; i++)
+      queue.add(i);
 	}
 
-	public String park(Car incomingCar)
+  @Override
+  public String park(Car incomingCar)
 	{
-		// Parking full?
-		if(nextParkingLocation == slots.length)
+    // Parking full?
+		if(queue.size() == 0)
 			return "Sorry, parking lot is full";
 
 		// Guess not.
-		int parkingLocation = nextParkingLocation; // save this for later
-		slots[parkingLocation] = incomingCar; // park the car
-		nextParkingLocation = getNextParkingLocation(parkingLocation); // get the next closest parking location to the entrance
+    int parkingLocation = queue.poll();// get the best place to park
+  	slots[parkingLocation] = incomingCar; // park the car
 		return "Allocated slot number: " + (++parkingLocation);// printing in 1-index so.
 	}
 
-	public String leave(int slotNo) // slotNo is 1-indexed
+  @Override
+	protected int getNextParkingLocation(int initalPosition)
 	{
-		slotNo--; // converting to zero-indexed form to make our life easy.
-
-		// unclear whether it's a good idea to do this. But hey, idiot-proof input.
-		if(slotNo < 0 || slotNo >= slots.length)
-			return "Invalid slot number";
-
-		// returns message if there's no car at that slot.
-		if(slots[slotNo] == null)
-			return "That slot is empty";
-
-		// all idiot-proofing complete. Moving on...
-		slots[slotNo] = null; // get rid of that car.
-
-		// update the nextParkingLocation pointer only if the newly-empty slot is closer to the entrance
-		if( slotNo < nextParkingLocation )
-			nextParkingLocation = slotNo;
-
-		return "Slot number " + (++slotNo) + " is free";//using 1-index for printing
-	}
-
-	private int getNextParkingLocation(int initalPosition)
-	{
-		// ugh. so ugly. Linear check for the next empty slot. At least we're not starting from slots[0]?
-		int pos;
-		for(pos = initalPosition; pos < slots.length && slots[pos] != null; pos++);
+		int pos = queue.poll();
 		return pos;
 	}
+
+  @Override
+  protected void updateAvailableParkingLocations(int availableSlot)
+  {
+    queue.add(availableSlot);
+  }
 }

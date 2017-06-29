@@ -66,7 +66,7 @@ public class AppTest
     // test that a Parking Lot object can be created
     public void testParkingLotCreation()
     {
-      ParkingLot lot = new ParkingLot(6);
+      ParkingLot lot = new BetterParkingLot(6);
 
       assertTrue( true );
     }
@@ -74,7 +74,7 @@ public class AppTest
     // basic parking functionality test
     public void testBasicPark()
     {
-      ParkingLot lot = new ParkingLot(3);
+      ParkingLot lot = new BetterParkingLot(3);
       String result = lot.park(new Car("KA-01-HH-1234","White"));
 
       assertEquals( result , "Allocated slot number: 1" );
@@ -83,7 +83,7 @@ public class AppTest
     // now we check that parking logic works right
     public void testParkMore()
     {
-      ParkingLot lot = new ParkingLot(3);
+      ParkingLot lot = new BetterParkingLot(3);
 
       // this part we checked already
       String result = lot.park(new Car("KA-01-HH-1234","White"));
@@ -104,7 +104,7 @@ public class AppTest
     // test basic leaving functionality
     public void testBasicLeave()
     {
-      ParkingLot lot = new ParkingLot(3);
+      ParkingLot lot = new BetterParkingLot(3);
       lot.park(new Car("KA-01-HH-1234","White"));
 
       String result = lot.leave(1);
@@ -115,7 +115,7 @@ public class AppTest
     // check that the system catches situations where people try to empty an invalid/empty slot
     public void testIdiotProofingLeave()
     {
-      ParkingLot lot = new ParkingLot(3);
+      ParkingLot lot = new BetterParkingLot(3);
       lot.park(new Car("KA-01-HH-1234","White"));
 
       // Invalid slot case (boundary check, I guess)
@@ -140,7 +140,7 @@ public class AppTest
     // if a car leaves then a new car will probably want to park there instead of at the end
     public void testParkingLocationChangeAfterLeave()
     {
-      ParkingLot lot = new ParkingLot(6);
+      ParkingLot lot = new BetterParkingLot(6);
 
       // first we park some cars
       lot.park(new Car("KA-01-HH-1234","White"));
@@ -159,7 +159,7 @@ public class AppTest
     // same as previous but one step further
     public void testParkingLocationChange()
     {
-      ParkingLot lot = new ParkingLot(6);
+      ParkingLot lot = new BetterParkingLot(6);
 
       // first we park some cars
       lot.park(new Car("KA-01-HH-1234","White"));

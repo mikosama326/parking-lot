@@ -39,17 +39,22 @@ class ParkingLot
 		slots[slotNo] = null; // get rid of that car.
 
 		// update the nextParkingLocation pointer only if the newly-empty slot is closer to the entrance
-		if( slotNo < nextParkingLocation )
-			nextParkingLocation = slotNo;
+		updateAvailableParkingLocations(slotNo);
 
 		return "Slot number " + (++slotNo) + " is free";//using 1-index for printing
 	}
 
-	private int getNextParkingLocation(int initalPosition)
+	protected int getNextParkingLocation(int initalPosition)
 	{
 		// ugh. so ugly. Linear check for the next empty slot. At least we're not starting from slots[0]?
 		int pos;
 		for(pos = initalPosition; pos < slots.length && slots[pos] != null; pos++);
 		return pos;
 	}
+
+	protected void updateAvailableParkingLocations(int availableSlot)
+  {
+    if( availableSlot < nextParkingLocation )
+			nextParkingLocation = availableSlot;
+  }
 }
