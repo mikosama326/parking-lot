@@ -70,12 +70,29 @@ public class AppTest
       assertTrue( true );
     }
 
-    public void testPark()
+    public void testBasicPark()
     {
       ParkingLot lot = new ParkingLot(6);
       String result = lot.park(new Car("KA-01-HH-1234","White"));
-      
+
       assertTrue( result.equals("Allocated slot number: 1") );
+    }
+
+    public void testParkMore()
+    {
+      ParkingLot lot = new ParkingLot(3);
+
+      String result = lot.park(new Car("KA-01-HH-1234","White"));
+      assertTrue( result.equals("Allocated slot number: 1") );
+
+      result = lot.park(new Car("KA-01-HH-9999","White"));
+      assertTrue( result.equals("Allocated slot number: 2") );
+
+      result = lot.park(new Car("KA-01-BB-0001","Black"));
+      assertTrue( result.equals("Allocated slot number: 3") );
+
+      result = lot.park(new Car("KA-01-HH-7777","White"));
+      assertTrue( result.equals("Sorry, parking lot is full") );
     }
 
 }
