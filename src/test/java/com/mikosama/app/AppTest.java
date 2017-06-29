@@ -105,4 +105,24 @@ public class AppTest
       assertTrue( result.equals("Slot number 1 is free") );
     }
 
+    public void testIdiotProofingLeave()
+    {
+      ParkingLot lot = new ParkingLot(3);
+      lot.park(new Car("KA-01-HH-1234","White"));
+
+      // Invalid case
+      String result = lot.leave(-1);
+      assertTrue( result.equals("Invalid slot number") );
+
+      // Empty slot case
+      result = lot.leave(2);
+      assertTrue( result.equals("That slot is empty") );
+
+      // A slot where a car has already left
+      result = lot.leave(1);
+      assertTrue( result.equals("Slot number 1 is free") ); // just a double-check
+
+      result = lot.leave(1);
+      assertTrue( result.equals("That slot is empty") );
+    }
 }
