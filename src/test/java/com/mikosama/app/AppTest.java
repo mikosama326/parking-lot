@@ -196,4 +196,24 @@ public class AppTest
       result = lot.searchSlotByRegistrationNo("KA-01-HH-2701");
       assertEquals(result , "Not found");
     }
+
+    public void testSearchSlotsByColor()
+    {
+      ParkingLot lot = new BetterParkingLot(6);
+
+      // first we park some cars
+      lot.park(new Car("KA-01-HH-1234","White"));
+      lot.park(new Car("KA-01-HH-9999","White"));
+      lot.park(new Car("KA-01-BB-0001","Black"));
+      lot.park(new Car("KA-01-HH-7777","White"));
+
+      String result = lot.searchSlotsByColor("White");
+      assertEquals(result, "1,2,4");
+
+      result = lot.searchSlotsByColor("Black");
+      assertEquals(result, "3");
+
+      result = lot.searchSlotsByColor("Purple");
+      assertEquals(result , "Not found");
+    }
 }
