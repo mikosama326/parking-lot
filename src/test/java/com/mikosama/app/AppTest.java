@@ -178,8 +178,43 @@ public class AppTest
       assertEquals( result , "Allocated slot number: 5" );
     }
 
-    //need a more comprehensive test here but we'll work on that later
+    // a more comprehensive test that everything works right.
+    public void testParkingLocationsComprehensive()
+    {
+      ParkingLot lot = new BetterParkingLot(6);
+      // first we park some cars
+      lot.park(new Car("KA-01-HH-1234","White"));
+      lot.park(new Car("KA-01-HH-9999","White"));
+      lot.park(new Car("KA-01-BB-0001","Black"));
+      lot.park(new Car("KA-01-HH-7777","White"));
 
+      // now we let one of these cars leave
+      lot.leave(2);
+
+      // then we park another car in that newly-empty space
+      lot.park(new Car("KA-01-HH-2701","Blue"));
+
+      // and now we try to park one more car
+      String result = lot.park(new Car("KA-01-HH-3141","Black"));
+      assertEquals( result , "Allocated slot number: 5" );
+
+      result = lot.park(new Car("KA-01-HH-4677","Black"));
+      assertEquals( result , "Allocated slot number: 6" );
+
+      result = lot.park(new Car("KA-01-AA-4177","Blue"));
+      assertEquals( result , "Sorry, parking lot is full" );
+
+      result = lot.leave(5);
+      assertEquals( result , "Slot number 5 is free" );
+
+      result = lot.leave(3);
+      assertEquals( result , "Slot number 3 is free" );
+
+      result = lot.park(new Car("KA-01-AA-4177","Blue"));
+      assertEquals( result , "Allocated slot number: 3" );
+    }
+
+    // testing search by registration number
     public void testSearchSlotByRegistrationNumber()
     {
       ParkingLot lot = new BetterParkingLot(6);
@@ -197,6 +232,7 @@ public class AppTest
       assertEquals(result , "Not found");
     }
 
+    // testing the search by color features
     public void testSearchSlotsByColor()
     {
       ParkingLot lot = new BetterParkingLot(6);
@@ -237,6 +273,7 @@ public class AppTest
       assertEquals(result , "Not found");
     }
 
+    // test that status is printed correctly
     public void testStatus()
     {
       ParkingLot lot = new BetterParkingLot(6);
@@ -250,18 +287,11 @@ public class AppTest
 
       String result = lot.status();
       assertEquals( result,
-"Slot No.\tRegistration No\tColour\n1\tKA-01-HH-1234\tWhite\n3\tKA-01-BB-0001\tBlack\n4\tKA-01-HH-7777\tWhite\n" );
+"Slot No.\tRegistration No\tColour\n1\tKA-01-HH-1234\tWhite\n3\tKA-01-BB-0001\tBlack\n4\tKA-01-HH-7777\tWhite" );
     }
 
     /*
-    * Woohoo! That's the end of all Parking Lot Unit Tests
-    * Moving on to Unit Testing the Shell
+    ** Unit testing the Shell is a bit difficult because we need to monitor STDOUT to do that. So I'll leave it be for now.
     */
-/*
-    public void testShellCreateParkingLotCommand()
-    {
-      Shell shell = new Shell();
-      String result = shell.parseCommand("create_parking_lot 6");
-      assertEquals( result, "Created a parking lot with 6 slots" );
-    }*/
+
 }

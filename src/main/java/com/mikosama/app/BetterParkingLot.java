@@ -1,11 +1,11 @@
 package com.mikosama.app;
 
-import java.util.Comparator;
 import java.util.PriorityQueue;
 
 class BetterParkingLot extends ParkingLot
 {
-  PriorityQueue<Integer> queue;
+  PriorityQueue<Integer> queue; // to make things potentially more efficient, we'll use a PriorityQueue full of available slots numbers
+  // and here's hoping I have an (almost) O(log n) complexity.
 
 	public BetterParkingLot( int size )
 	{
@@ -13,21 +13,8 @@ class BetterParkingLot extends ParkingLot
     queue = new PriorityQueue<Integer>(size);
 
     // add all available parking slots in zero-indexed form
-    for(int i=0; i < size; i++)
+    for(int i=0; i <= size; i++) // this is my only problem. It HAS to be O(n) here.
       queue.add(i);
-	}
-
-  @Override
-  public String park(Car incomingCar)
-	{
-    // Parking full?
-		if(queue.size() == 0)
-			return "Sorry, parking lot is full";
-
-		// Guess not.
-    int parkingLocation = queue.poll();// get the best place to park
-  	slots[parkingLocation] = incomingCar; // park the car
-		return "Allocated slot number: " + (++parkingLocation);// printing in 1-index so.
 	}
 
   @Override

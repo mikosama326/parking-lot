@@ -5,11 +5,21 @@ import java.io.InputStreamReader;
 import java.io.FileReader;
 import java.io.PrintWriter;
 
-class Shell
+/*
+** An interface for any UI for the Parking Lot system.
+*/
+interface UI
+{
+	public void run();
+}
+
+/*
+** For this application, we're using a text-based command-line shell.
+*/
+class Shell implements UI
 {
 	BufferedReader br = null; // to handle input
-	ParkingLot lot; // for now, we're assuming that there's only one parking lot per shell
-	PrintWriter out = new PrintWriter(System.out); // since we're writing to STDOUT. But we can extend this to output to a file as well.
+	ParkingLot lot; // for now, we're assuming that there's only one parking lot per Shell
 
 	public Shell( String filename) // taking input from a file
 	{
@@ -29,14 +39,21 @@ class Shell
 		br = new BufferedReader(new InputStreamReader(System.in));
 	}
 
+	/*
+	** This is the function which we call to run the shell.
+	*/
+	@Override
 	public void run()
 	{
 		String line;
     try
-		{
-			while ((line = br.readLine()) != null)
+		{	/*
+			** Ideally we'd like to put some sort of prompt like ">>" or something to make it more legible, but it might get in the way of automatic testing.
+			*/
+			while ((line = br.readLine()) != null && !line.equals(""))
 			{
-				parseCommand( line );
+				String result = parseCommand( line );
+				System.out.println(result);
     	}
 		}
 		catch( IOException e )
@@ -46,12 +63,14 @@ class Shell
 		}
 	}
 
+	/*
+	** The string command parsing and execution
+	*/
 	private String parseCommand( String line )
 	{
 		String[] args = line.split( "\\s" ); // split the line by whitespace
 
 		// all the supported commands
-
 		if( "create_parking_lot".equals(args[0]) ) // Use: create_parking_lot <parking lot size>
 		{
 			lot = new BetterParkingLot(Integer.parseInt(args[1]));
@@ -100,6 +119,7 @@ class Shell
 			answer += "slot_numbers_for_cars_with_colour <color>\n";
 			answer += "slot_number_for_registration_number <registration no>\n";
 			answer += "help\n";
+			answer += "You can exit using ctrl-D.\n";
 			return answer;
 		}
 			return "Unsupported command.";

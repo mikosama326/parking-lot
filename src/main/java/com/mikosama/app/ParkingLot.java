@@ -2,34 +2,51 @@ package com.mikosama.app;
 
 import java.util.ArrayList;
 
+/*
+** ParkingLot is a class which performs all the required operations of a parking lot. Each method returns String messages after completion.
+*/
 class ParkingLot
 {
-	int nextParkingLocation = 0;
-	Car[] slots; //are we really using an array for this?
+	private Car[] slots; //to make deletions easier.
 
+	private int nextParkingLocation = 0; // a pointer that'll help us find the next place to park easier.
+
+	/*
+	** Our one and only constructor.
+	*/
 	public ParkingLot( int size )
 	{
 		slots = new Car[size];
 	}
 
-	public String create() // meant to help check that the parking lot creation happened correctly.
+	/*
+	** Meant just to help check that the parking lot creation happened correctly.
+	*/
+	public String create()
 	{
 		return "Created a parking lot with " + slots.length + " slots";
 	}
 
+	/*
+	** To park a car in the parking lot
+	*/
 	public String park(Car incomingCar)
 	{
+		int parkingLocation = getNextParkingLocation(nextParkingLocation); //get the best place to park
+		nextParkingLocation = parkingLocation; // to store this value for later.
+
 		// Parking full?
-		if(nextParkingLocation == slots.length)
+		if(!(parkingLocation >= 0) || !(parkingLocation < slots.length))
 			return "Sorry, parking lot is full";
 
 		// Guess not.
-		int parkingLocation = nextParkingLocation; // save this for later
-		slots[parkingLocation] = incomingCar; // park the car
-		nextParkingLocation = getNextParkingLocation(parkingLocation); // get the next closest parking location to the entrance
+  	slots[parkingLocation] = incomingCar; // park the car
 		return "Allocated slot number: " + (++parkingLocation);// printing in 1-index so.
 	}
 
+	/*
+	** To simulate a car leaving the parking lot
+	*/
 	public String leave(int slotNo) // slotNo is 1-indexed
 	{
 		slotNo--; // converting to zero-indexed form to make our life easy.
@@ -51,20 +68,9 @@ class ParkingLot
 		return "Slot number " + (++slotNo) + " is free";//using 1-index for printing
 	}
 
-	protected int getNextParkingLocation(int initalPosition)
-	{
-		// ugh. so ugly. Linear check for the next empty slot. At least we're not starting from slots[0]?
-		int pos;
-		for(pos = initalPosition; pos < slots.length && slots[pos] != null; pos++);
-		return pos;
-	}
-
-	protected void updateAvailableParkingLocations(int availableSlot)
-  {
-    if( availableSlot < nextParkingLocation )
-			nextParkingLocation = availableSlot;
-  }
-
+	/*
+	** Search the parking lot for a car by Registration Number and return the slot number
+	*/
 	public String searchSlotByRegistrationNo(String registrationNo)
 	{
 		for(int i = 0; i < slots.length ; i++)
@@ -75,6 +81,9 @@ class ParkingLot
 		return "Not found";
 	}
 
+	/*
+	** Search the parking lot for a car by color and return the slot numbers of those cars
+	*/
 	public String searchSlotsByColor(String color)
 	{
 		ArrayList<Integer> results = searchByColor(color);
@@ -91,6 +100,9 @@ class ParkingLot
 		return answer;
 	}
 
+	/*
+	** Search the parking lot for a car by color and return the registration numbers of those cars
+	*/
 	public String searchRegistrationNosByColor(String color)
 	{
 		ArrayList<Integer> results = searchByColor(color);
@@ -107,7 +119,10 @@ class ParkingLot
 		return answer;
 	}
 
-	protected ArrayList<Integer> searchByColor(String color)
+	/*
+	** Returns an ArrayList full of slot numbers of cars which color 'color'
+	*/
+	private ArrayList<Integer> searchByColor(String color)
 	{
 		ArrayList<Integer> results = new ArrayList<Integer>();
 		for(int i = 0; i < slots.length ; i++)
@@ -118,6 +133,9 @@ class ParkingLot
 		return results;
 	}
 
+	/*
+	** Prints the status of the parking lot in a nice tabular form
+	*/
 	public String status()
 	{
 		String answer = "Slot No.\tRegistration No\tColour\n";
@@ -126,7 +144,24 @@ class ParkingLot
 			if( slots[i] != null )
 				answer += (i+1) + "\t" + slots[i].getRegistrationNo() + "\t" + slots[i].getColor() + "\n";
 		}
-		return answer;
+		return answer.substring(0,answer.length()-1); //removing the last "\n"
+	}
+
+	/*
+	** Implementation of the parking lot next-pointer updations
+	*/
+	protected int getNextParkingLocation(int initalPosition)
+	{
+		// ugh. so ugly. Linear check for the next empty slot. At least we're not starting from slots[0]?
+		int pos;
+		for(pos = initalPosition; pos < slots.length && slots[pos] != null; pos++);
+		return pos;
+	}
+
+	protected void updateAvailableParkingLocations(int availableSlot)
+	{
+		if( availableSlot < nextParkingLocation )
+			nextParkingLocation = availableSlot;
 	}
 
 }

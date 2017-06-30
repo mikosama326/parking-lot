@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.mikosama.app.AppTest" time="0.002" tests="15" errors="0" skipped="0" failures="0">
+<testsuite name="com.mikosama.app.AppTest" time="0.005" tests="16" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="sun.boot.library.path" value="/usr/local/java/jdk1.8.0_102/jre/lib/amd64"/>
@@ -59,19 +59,20 @@
     <property name="sun.desktop" value="gnome"/>
     <property name="sun.cpu.isalist" value=""/>
   </properties>
-  <testcase name="testSearchSlotsByColor" classname="com.mikosama.app.AppTest" time="0.001"/>
-  <testcase name="testSearchRegistrationNosByColor" classname="com.mikosama.app.AppTest" time="0"/>
-  <testcase name="testInteractiveShellCreation" classname="com.mikosama.app.AppTest" time="0"/>
-  <testcase name="testParkingLotCreation" classname="com.mikosama.app.AppTest" time="0"/>
-  <testcase name="testBasicPark" classname="com.mikosama.app.AppTest" time="0"/>
-  <testcase name="testParkMore" classname="com.mikosama.app.AppTest" time="0"/>
+  <testcase name="testParkMore" classname="com.mikosama.app.AppTest" time="0.005"/>
   <testcase name="testBasicLeave" classname="com.mikosama.app.AppTest" time="0"/>
-  <testcase name="testStatus" classname="com.mikosama.app.AppTest" time="0"/>
-  <testcase name="testThatThisRuns" classname="com.mikosama.app.AppTest" time="0"/>
-  <testcase name="testCarCreation" classname="com.mikosama.app.AppTest" time="0"/>
-  <testcase name="testFileShellCreation" classname="com.mikosama.app.AppTest" time="0.001"/>
   <testcase name="testIdiotProofingLeave" classname="com.mikosama.app.AppTest" time="0"/>
   <testcase name="testParkingLocationChangeAfterLeave" classname="com.mikosama.app.AppTest" time="0"/>
+  <testcase name="testParkingLotCreation" classname="com.mikosama.app.AppTest" time="0"/>
+  <testcase name="testBasicPark" classname="com.mikosama.app.AppTest" time="0"/>
+  <testcase name="testThatThisRuns" classname="com.mikosama.app.AppTest" time="0"/>
+  <testcase name="testInteractiveShellCreation" classname="com.mikosama.app.AppTest" time="0"/>
+  <testcase name="testCarCreation" classname="com.mikosama.app.AppTest" time="0"/>
   <testcase name="testParkingLocationChange" classname="com.mikosama.app.AppTest" time="0"/>
+  <testcase name="testParkingLocationsComprehensive" classname="com.mikosama.app.AppTest" time="0"/>
   <testcase name="testSearchSlotByRegistrationNumber" classname="com.mikosama.app.AppTest" time="0"/>
+  <testcase name="testSearchSlotsByColor" classname="com.mikosama.app.AppTest" time="0"/>
+  <testcase name="testSearchRegistrationNosByColor" classname="com.mikosama.app.AppTest" time="0"/>
+  <testcase name="testStatus" classname="com.mikosama.app.AppTest" time="0"/>
+  <testcase name="testFileShellCreation" classname="com.mikosama.app.AppTest" time="0"/>
 </testsuite>

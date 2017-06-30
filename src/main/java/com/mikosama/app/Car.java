@@ -5,7 +5,7 @@ class Car
 		private String registrationNo;
 		private String color;
 
-		public Car(String registrationNo,String color)
+		public Car(String registrationNo, String color)
 		{
 				//check that the registrationNo adheres to come sort of regex?
 

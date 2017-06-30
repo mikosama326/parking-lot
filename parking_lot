@@ -1,0 +1,13 @@
+mvn package
+
+echo "Beginning Program Execution:\n"
+
+if [ $# -eq 0 ]
+then
+  java -cp target/srija-1.0-SNAPSHOT.jar com.mikosama.app.App
+elif [ $# -eq 1 ]
+then
+  java -cp target/srija-1.0-SNAPSHOT.jar com.mikosama.app.App $1
+else
+  echo "Usage: "$0" [filename]"
+fi

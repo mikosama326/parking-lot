@@ -4,6 +4,23 @@ public class App
 {
 	public static void main( String[] args )
 	{
-		System.out.println( "Hi!" );
+		UI ui;
+
+		if(args.length == 1)
+		{
+			ui = new Shell(args[0]);
+			ui.run();
+		}
+		else if (args.length == 0)
+		{
+			ui = new Shell();
+			ui.run();
+		}
+		else
+		{
+			System.out.println("Oops not quite right. " + args.length);
+			System.exit(1);
+		}
+
 	}
 }
