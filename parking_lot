@@ -1,6 +1,7 @@
-mvn package
+echo "Building + Testing..."
+mvn -q package
 
-echo "Beginning Program Execution:\n"
+echo "Beginning Program Execution:"
 
 if [ $# -eq 0 ]
 then

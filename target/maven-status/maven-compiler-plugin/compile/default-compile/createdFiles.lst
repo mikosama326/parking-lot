@@ -2,7 +2,6 @@ com/mikosama/app/Shell.class
 com/mikosama/app/App.class
 com/mikosama/app/TicketGeneration.class
 com/mikosama/app/ParkingLot.class
-com/mikosama/app/Slot.class
 com/mikosama/app/Ticket.class
 com/mikosama/app/Car.class
 com/mikosama/app/UI.class
