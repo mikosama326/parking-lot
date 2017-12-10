@@ -1,5 +1,9 @@
 # Parking Lot Simulation
 
+A coding assignment for a freshers' job recruitment. Written in Java, meant to be compiled and run on Linux. Developed using TDD.
+
+The goal is to simulate a parking lot with a lot-allocation system that assigns an incoming car the lot with the lowest number. It has a Shell-based UI with commands for each car as it enters.
+
 ## How to build
 
 You'll need Maven and JUnit, as well as the Java JDK and JRE set up.
